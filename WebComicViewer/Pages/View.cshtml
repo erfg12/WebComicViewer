@@ -1,0 +1,14 @@
+﻿@page
+@model ViewModel
+@{
+    var reader = new HeapStack.Core.CBR.ComicReader();
+    var book = reader.Read(ViewModel.ReadFile);
+    ViewData["Title"] = "View Comic: " + System.IO.Path.GetFileNameWithoutExtension(ViewModel.ReadFile);
+
+    foreach (var p in book.Pages)
+    {
+        var base64 = Convert.ToBase64String(p.Data);
+        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    <img src="@imgSrc" style="width:100%;" loading="lazy">
+    }
+}

@@ -1,0 +1,14 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var reader = new HeapStack.Core.CBR.ComicReader();
+    var books = IndexModel.Config.GetSection("Comics_Directory").Value;
+}
+
+@{
+    foreach (string file in Directory.EnumerateFiles(books, "*.*", SearchOption.AllDirectories))
+{
+    <p>@System.IO.Directory.GetParent(file)@System.IO.Path.DirectorySeparatorChar<a href="View/?readfile=@System.Web.HttpUtility.UrlEncode(System.IO.Path.GetFullPath(file))">@System.IO.Path.GetFileNameWithoutExtension(file)</a></p>
+}
+}
