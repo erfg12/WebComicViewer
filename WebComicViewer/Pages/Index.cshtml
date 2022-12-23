@@ -6,6 +6,8 @@
     var books = IndexModel.Config.GetSection("Comics_Directory").Value;
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
 @{
     foreach (string file in Directory.EnumerateFiles(books, "*.*", SearchOption.AllDirectories))
 {

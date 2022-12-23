@@ -15,4 +15,20 @@ html {
 
 body {
   margin-bottom: 60px;
+  width:100%;
+  padding:0px;
+  margin:0px;
+}
+
+.comic_page {
+    object-fit: contain;
+    float:left;
+    height: 100vh;
+}
+
+.spacers {
+    clear: both;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

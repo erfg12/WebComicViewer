@@ -5,10 +5,23 @@
     var book = reader.Read(ViewModel.ReadFile);
     ViewData["Title"] = "View Comic: " + System.IO.Path.GetFileNameWithoutExtension(ViewModel.ReadFile);
 
+    int i = 0;
     foreach (var p in book.Pages)
     {
         var base64 = Convert.ToBase64String(p.Data);
         var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-    <img src="@imgSrc" style="width:100%;" loading="lazy">
+        <img src="@imgSrc" class="comic_page" loading="lazy">
+        if (i == 0) { // blank image after cover
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="comic_page" id="cover_spacer" loading="lazy">
+            <div class="spacers"><hr /></div>
+        } 
+        else
+        {
+            if (i % 2 == 0)
+            {
+                <div class="spacers"><hr /></div>
+            }
+        }
+        i++;
     }
 }
