@@ -10,5 +10,5 @@ Simple ASP.NET web app to view your CBR/CBZ comics on any device with a web view
 
 ### MacOS & Linux
 1) Install Docker
-2) `docker build -t WebComicViewer .`
-3) `docker run -d -p 13050:8080 --name WebComicViewer WebComicViewer`
+2) `docker build -t webcomicviewer .`
+3) `docker run -d -p 13050:8080 --name WebComicViewer webcomicviewer`
