@@ -1,6 +1,7 @@
 # Use the official ASP.NET Core runtime image as a base
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT Development
 EXPOSE 8080
 
 # Copy the published output of the ASP.NET Core application into the container

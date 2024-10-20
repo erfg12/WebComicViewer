@@ -8,11 +8,27 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
+<div class="thumbnails_browser">
 @{
     foreach (string file in Directory.EnumerateFiles(books, "*.*", SearchOption.AllDirectories))
-{
-    if (!System.IO.Path.GetFileName(file).StartsWith(".")) {
-        <p>@System.IO.Directory.GetParent(file)@System.IO.Path.DirectorySeparatorChar<a href="View/?readfile=@System.Web.HttpUtility.UrlEncode(System.IO.Path.GetFullPath(file))">@System.IO.Path.GetFileNameWithoutExtension(file)</a></p>
+    {
+        if (!System.IO.Path.GetFileName(file).StartsWith(".")) {
+            var imgSrc = "";
+            var fileNameWithoutExt = System.IO.Path.GetFileNameWithoutExtension(file);
+            var thumbnailPath = $"thumbnails/{fileNameWithoutExt}.png";
+            if (!System.IO.File.Exists($"wwwroot/{thumbnailPath}")) {
+                var base64 = reader.Read(file).Pages[0].Data;
+                System.IO.File.WriteAllBytes($"wwwroot/{thumbnailPath}", base64);
+            }
+            imgSrc = $"/{thumbnailPath}";
+            
+            <a href="View/?readfile=@System.Web.HttpUtility.UrlEncode(System.IO.Path.GetFullPath(file))">
+                <div class="thumbnail_container">
+                    <img src="@imgSrc" class="thumbnail" loading="lazy">
+                    <p>@fileNameWithoutExt</p>
+                </div>
+            </a>
+        }
     }
 }
-}
+</div>

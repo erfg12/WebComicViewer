@@ -12,7 +12,7 @@
         var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
         <img src="@imgSrc" class="comic_page" loading="lazy">
         if (i == 0) { // blank image after cover
-            <img src="/white.png" class="comic_page" id="cover_spacer" loading="lazy">
+            <img src="/white.png" class="comic_page blank_page" id="cover_spacer" loading="lazy">
             <div class="spacers"></div>
         } 
         else

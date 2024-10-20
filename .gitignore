@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+WebComicViewer/wwwroot/thumbnails/*.png
+WebComicViewer/wwwroot/thumbnails/*.jpg
+
 # User-specific files
 *.rsuser
 *.suo
