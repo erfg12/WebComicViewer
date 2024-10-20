@@ -1,0 +1,7 @@
+services:
+  webapp:
+    build: .
+    volumes:
+      - ~/Documents/comics:/app/comics
+    ports:
+      - "13050:8080"
