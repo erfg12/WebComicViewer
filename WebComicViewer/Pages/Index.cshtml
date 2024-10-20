@@ -1,12 +1,31 @@
 ﻿@page
+@using System.Net
+@using System.Net.Sockets
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    string hostName = Dns.GetHostName();
+    IPAddress[] addresses = Dns.GetHostAddresses(hostName);
+    string myIp = String.Empty;
+    foreach (IPAddress ip in addresses)
+    {
+        // Filter for IPv4 and non-loopback addresses
+        if (ip.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(ip) && !ip.ToString().StartsWith("169.254"))
+        {
+            myIp = ip.ToString();
+            break; // Stop after finding the first valid IP
+        }
+    }
+
+    var h = Request.IsHttps ? "https://" : "http://";
+    
+    ViewData["Title"] = $"Web Comic Viewer :: {h}{myIp}:13050";
     var reader = new HeapStack.Core.CBR.ComicReader();
     var books = IndexModel.Config.GetSection("Comics_Directory").Value;
 }
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h4>Web Comic Viewer, use this address to view your comics: @h@myIp:13050</h4>
 
 <div class="thumbnails_browser">
 @{
@@ -32,3 +51,7 @@
     }
 }
 </div>
+
+<footer>
+    Created by Jacob Fliss
+</footer>
